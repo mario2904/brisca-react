@@ -2,10 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
+
 import querystring from 'querystring';
 import * as _ from 'lodash';
 
 import App from './components/App';
+import LobbyContainer from './components/LobbyContainer';
+import PlayerInfo from './components/PlayerInfo';
 import reducers from './reducers';
 
 
@@ -27,6 +31,11 @@ ws.onmessage = function(event) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        <IndexRoute component={LobbyContainer} />
+        <Route path="playerInfo" component={PlayerInfo} />
+      </Route>
+    </Router>
   </Provider>
   , document.getElementById('app'));
