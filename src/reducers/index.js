@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import OnlinePlayersReducer from './OnlinePlayersReducer';
-import PlayerInfoReducer from './PlayerInfoReducer';
+import MyInfoReducer from './MyInfoReducer';
 
 const rootReducer = combineReducers ({
   onlinePlayers: OnlinePlayersReducer,
-  playerId: PlayerInfoReducer
+  playerId: MyInfoReducer
 });
 
 export default rootReducer;

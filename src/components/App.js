@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 
 import OnlinePlayersList from './OnlinePlayersList';
-import PlayerInfo from './PlayerInfo';
+import MyInfo from './MyInfo';
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <PlayerInfo />
+        <MyInfo />
         <OnlinePlayersList />
       </div>
     );

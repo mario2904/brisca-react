@@ -13,9 +13,11 @@ class OnlinePlayersList extends Component {
   render () {
     return (
       <div>
+        <h1>Online Players List:</h1>
         <ul>
           {this.renderPlayerList()}
         </ul>
+        <hr/>
       </div>
     );
   }
