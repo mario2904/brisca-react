@@ -19,9 +19,13 @@
   },
   "homepage": "https://github.com/mario2904/basic-webpack-react#readme",
   "dependencies": {
+    "lodash": "^4.15.0",
+    "querystring": "^0.2.0",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
-    "react-router": "^2.5.2"
+    "react-redux": "^4.4.5",
+    "react-router": "^2.5.2",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",
