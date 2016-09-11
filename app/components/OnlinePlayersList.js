@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 class OnlinePlayersList extends Component {
   renderPlayerList() {
     return this.props.onlinePlayers.map((player) => {
       return (
-        <li key={player}>{player}</li>
+        <li key={player}><Link to={"/player/" + player} activeStyle={{ color: 'green' }}>{player}</Link></li>
       );
     });
   }
