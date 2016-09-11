@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
     return (
       <div>
         <h1>Player ID: {this.props.playerId}</h1>
-        <hr/>
       </div>
     );
   }

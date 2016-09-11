@@ -18,7 +18,6 @@ class OnlinePlayersList extends Component {
         <ul>
           {this.renderPlayerList()}
         </ul>
-        <hr/>
       </div>
     );
   }
