@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as _ from 'lodash';
 
 import AvailableGamesList from '../components/AvailableGamesList';
 import GameInfo from '../components/GameInfo';
 import ws from '../services/websocket';
 
 class AvailableGames extends Component {
+  joinGame () {
+    console.log('join game', this.props.gameInfo.id);
+    ws.send(JSON.stringify({cmd: 'joinGame', gameId: this.props.gameInfo.id}));
+  }
   render () {
     console.log(this.props.gameInfo);
     return (
@@ -13,6 +18,7 @@ class AvailableGames extends Component {
         <h1>Available Games:</h1>
         <AvailableGamesList games={this.props.availableGames}/>
         <GameInfo game={this.props.gameInfo}/>
+        {_.isEmpty(this.props.gameInfo) || !_.isEmpty(this.props.myInfo.game) || <button onClick={() => this.joinGame()}>Join Game</button>}
       </div>
     );
   }
@@ -21,7 +27,8 @@ class AvailableGames extends Component {
 function mapStateToProps (state) {
   return {
     availableGames: state.availableGames,
-    gameInfo: state.gameInfo
+    gameInfo: state.gameInfo,
+    myInfo: state.myInfo
   };
 }
 
