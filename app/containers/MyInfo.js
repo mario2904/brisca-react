@@ -17,7 +17,7 @@ import GameInfo from '../components/GameInfo';
     else if (this.props.myInfo.game === undefined){
       return (
         <div>
-          <h1>Player ID: {this.props.myInfo.playerId}</h1>
+          <h1>Player ID: {this.props.myInfo.player.id}</h1>
           <button onClick={() => this.createGame()}>Create a Game</button>
         </div>
       );
@@ -25,7 +25,7 @@ import GameInfo from '../components/GameInfo';
     else {
       return (
         <div>
-          <h1>Player ID: {this.props.myInfo.playerId}</h1>
+          <h1>Player ID: {this.props.myInfo.player.id}</h1>
           <GameInfo game={this.props.myInfo.game}/>
         </div>
       );
