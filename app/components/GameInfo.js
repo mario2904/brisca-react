@@ -12,7 +12,7 @@ export default class GameInfo extends Component {
       return <h5>Select a game to view information.</h5>
     return (
       <div>
-        <h5>Game ID: {game.gameId}</h5>
+        <h5>Game ID: {game.id}</h5>
         <h5>Number of Players: {game.numOfPlayers}</h5>
         <ul>
           {this.renderPlayerList(game.players)}

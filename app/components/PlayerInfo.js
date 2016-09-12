@@ -9,7 +9,7 @@ export default class PlayerInfo extends Component {
     return (
       <div>
         <h1>Player Information:</h1>
-        <h5>Player ID: {player.player}</h5>
+        <h5>Player ID: {player.id}</h5>
         <h5>In Game: {player.inGame}</h5>
         <h5>Points: {player.points}</h5>
         <h5>Games Won: {player.gamesWon}</h5>
