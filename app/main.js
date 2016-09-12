@@ -19,13 +19,13 @@ const store = createStoreWithMiddleware(reducers);
 
 ws.onmessage = function(event) {
   // Change to Upper-Snake-case to follow redux best practices for TYPE
-  let data = JSON.parse(event.data);
-  let type = _.toUpper(_.snakeCase(data.cmd));
+  let msg = JSON.parse(event.data);
+  let type = _.toUpper(_.snakeCase(msg.cmd));
   store.dispatch({
     type,
-    payload: data
+    payload: msg.payload
   });
-  console.log(data);
+  console.log(msg);
   console.log(type);
 };
 
@@ -34,7 +34,6 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={LobbyContainer} />
-        <Route path="/player/:id" component={PlayerInfo} />
       </Route>
     </Router>
   </Provider>

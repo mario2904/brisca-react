@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import ws from '../services/websocket';
 
 class OnlinePlayersList extends Component {
-  renderPlayerList() {
-    return this.props.onlinePlayers.map((player) => {
-      return (
-        <li key={player}><Link to={"/player/" + player} activeStyle={{ color: 'green' }}>{player}</Link></li>
-      );
+  getPlayerInfo (player) {
+    ws.send(JSON.stringify({cmd: 'getPlayerInfo', player: player}));
+  }
+  renderPlayerList () {
+    return this.props.onlinePlayers.map((player, i) => {
+      return <li key={player} onClick={()=>this.getPlayerInfo(player)}>{player}</li>;
     });
   }
 

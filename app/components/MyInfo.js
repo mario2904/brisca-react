@@ -1,17 +1,39 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import * as _ from 'lodash';
+
+import ws from '../services/websocket';
+import GameInfo from './GameInfo';
 
  class MyInfo extends Component {
+   createGame () {
+     // Hard coded num of players... for now
+     ws.send(JSON.stringify({cmd: 'createGame', numOfPlayers: 4}));
+   }
   render() {
-    return (
-      <div>
-        <h1>Player ID: {this.props.playerId}</h1>
-      </div>
-    );
+    if (_.isEmpty(this.props.myInfo)) {
+      return <h1>Loading...</h1>;
+    }
+    else if (this.props.myInfo.game === undefined){
+      return (
+        <div>
+          <h1>Player ID: {this.props.myInfo.playerId}</h1>
+          <button onClick={() => this.createGame()}>Create a Game</button>
+        </div>
+      );
+    }
+    else {
+      return (
+        <div>
+          <h1>Player ID: {this.props.myInfo.playerId}</h1>
+          <GameInfo game={this.props.myInfo.game}/>
+        </div>
+      );
+    }
   }
 }
 function mapStateToProps (state) {
-  return {playerId: state.playerId};
+  return {myInfo: state.myInfo};
 }
 
 export default connect (mapStateToProps)(MyInfo);
