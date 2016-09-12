@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as _ from 'lodash';
 
 import ws from '../services/websocket';
-import GameInfo from './GameInfo';
+import GameInfo from '../components/GameInfo';
 
  class MyInfo extends Component {
    createGame () {

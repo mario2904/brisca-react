@@ -8,6 +8,8 @@ export default class GameInfo extends Component {
   }
   render () {
     let game = this.props.game;
+    if (_.isEmpty(game))
+      return <h5>Select a game to view information.</h5>
     return (
       <div>
         <h5>Game ID: {game.gameId}</h5>

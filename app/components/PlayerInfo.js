@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import * as _ from 'lodash';
 
-class PlayerInfo extends Component {
+export default class PlayerInfo extends Component {
   render() {
-    if (_.isEmpty(this.props.playerInfo)) {
-      return (
-        <div>
-          <h1>Player Information:</h1>
-          <h3>No Player has been selected.</h3>
-        </div>
-      );
-    }
-    let player = this.props.playerInfo;
+    let player = this.props.player;
+    if (_.isEmpty(player))
+      return <h5>Select a player to display information.</h5>;
     return (
       <div>
         <h1>Player Information:</h1>
@@ -25,10 +18,3 @@ class PlayerInfo extends Component {
     );
   }
 }
-function mapStateToProps(state) {
-  return {
-    playerInfo: state.playerInfo
-  };
-}
-
-export default connect (mapStateToProps)(PlayerInfo);

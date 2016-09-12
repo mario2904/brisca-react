@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 
-import OnlinePlayersList from './OnlinePlayersList';
-import GameInfo from './GameInfo';
-import PlayerInfo from './PlayerInfo'
-import MyInfo from './MyInfo';
+import OnlinePlayers from '../containers/OnlinePlayers';
+import AvailableGames from '../containers/AvailableGames';
+import MyInfo from '../containers/MyInfo';
 
 export default class LobbyContainer extends Component {
   render () {
@@ -11,9 +10,9 @@ export default class LobbyContainer extends Component {
       <div>
         <MyInfo />
         <hr/>
-        <OnlinePlayersList />
+        <AvailableGames />
         <hr/>
-        <PlayerInfo />
+        <OnlinePlayers />
         <hr/>
       </div>
     );

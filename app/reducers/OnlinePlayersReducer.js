@@ -1,4 +1,5 @@
 export default function (state=[], action) {
+  
   switch (action.type) {
     case 'INIT_PLAYERS':
       return action.payload.players;
