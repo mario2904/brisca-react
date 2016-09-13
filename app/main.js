@@ -7,6 +7,7 @@ import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
 import * as _ from 'lodash';
 
 import App from './components/App';
+import Game from './containers/Game';
 import LobbyContainer from './components/LobbyContainer';
 import PlayerInfo from './components/PlayerInfo';
 import reducers from './reducers';
@@ -34,6 +35,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={LobbyContainer} />
+        <Route path="/game" component={Game}></Route>
       </Route>
     </Router>
   </Provider>
