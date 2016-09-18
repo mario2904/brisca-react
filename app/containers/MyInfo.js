@@ -8,7 +8,7 @@ import GameInfo from '../components/GameInfo';
  class MyInfo extends Component {
    createGame () {
      // Hard coded num of players... for now
-     ws.send(JSON.stringify({cmd: 'createGame', numOfPlayers: 4}));
+     ws.send(JSON.stringify({cmd: 'createGame', numOfPlayers: 2}));
    }
   render() {
     if (_.isEmpty(this.props.myInfo)) {
