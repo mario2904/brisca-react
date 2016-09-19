@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { selectCard } from '../actions';
+import { bindActionCreators } from 'redux';
 
+import ws from '../services/websocket';
 import * as _ from 'lodash';
 // load all image files.
 const img = require.context("../img", true, /\.(png|jpg)$/);
@@ -15,31 +18,42 @@ const CARD_HEIGHT = 139;
 
 
 class Game extends Component {
-  cardClick () {
+  cardClick (card) {
+    const { myIndex, currentIndex, hasPlayed } = this.props.game;
 
+    if (currentIndex === myIndex && !hasPlayed) {
+      this.props.selectCard(card);
+      ws.send(JSON.stringify({cmd: 'playCard', card: card.name}));
+    }
   }
   renderCards() {
     const game = this.props.game;
-    const { life, myIndex, players } = game;
+    const { life, myIndex, currentIndex, players } = game;
 
     if (_.isEmpty(this.props.game)) {
       return;
     }
     const p1 = players[myIndex].cards.map((card, i) => {
-      const x = (BOARD_WIDTH / 2) - ((CARD_WIDTH * 3) / 2) - (2 * MARGIN) + (i * (CARD_WIDTH + (2 * MARGIN)));
-      const y = BOARD_HEIGHT - CARD_HEIGHT - (2 * MARGIN);
+      let x = (BOARD_WIDTH / 2) - ((CARD_WIDTH * 3) / 2) - (2 * MARGIN) + (i * (CARD_WIDTH + (2 * MARGIN)));
+      let y = BOARD_HEIGHT - CARD_HEIGHT - (2 * MARGIN);
+      if (_.isEqual(players[myIndex].chosenCard,{name: card, pos: i})) {
+        y = y - CARD_HEIGHT;
+      }
       return (
         <img
           key={card}
-          onClick={() => this.cardClick()}
+          onClick={() => this.cardClick({name: card, pos: i})}
           src={img(`./${card}.jpg`)}
           style={cardStyle(x, y)} />
       );
     });
 
     const p2 = players[(myIndex + 1) % players.length].cards.map((card, i) => {
-      const x = (BOARD_WIDTH / 2) + ((CARD_WIDTH) / 2) + (2 * MARGIN) - (i * (CARD_WIDTH + (2 * MARGIN)));
-      const y = 0;
+      let x = (BOARD_WIDTH / 2) + ((CARD_WIDTH) / 2) + (2 * MARGIN) - (i * (CARD_WIDTH + (2 * MARGIN)));
+      let y = 0;
+      if (_.isEqual(players[(myIndex + 1) % players.length].chosenCard,{name: card, pos: i})) {
+        y = y + CARD_HEIGHT;
+      }
       return (
         <img
           key={card + '_' + i}
@@ -62,6 +76,7 @@ class Game extends Component {
           {this.renderCards()}
           {/* Here goes all the card animations... */}
         </div>
+        <h4>{this.props.game.status}</h4>
       </div>
     );
   }
@@ -69,6 +84,9 @@ class Game extends Component {
 
 function mapStateToProps (state) {
   return {game: state.game};
+}
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({selectCard: selectCard}, dispatch);
 }
 
 const boardStyle = {
@@ -89,4 +107,4 @@ function cardStyle (x=0, y=0) {
   };
 }
 
-export default connect (mapStateToProps)(Game);
+export default connect (mapStateToProps, mapDispatchToProps)(Game);
