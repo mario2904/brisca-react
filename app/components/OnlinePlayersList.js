@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import ws from '../services/websocket';
 
 export default class OnlinePlayersList extends Component {
@@ -7,16 +8,14 @@ export default class OnlinePlayersList extends Component {
   }
   renderPlayerList () {
     return this.props.players.map((player) => {
-      return <li key={player} onClick={() => this.getPlayerInfo(player)}>{player}</li>;
+      return <ListGroupItem onClick={() => this.getPlayerInfo(player)}>{player}</ListGroupItem>;
     });
   }
   render () {
     return (
-      <div>
-        <ul>
-          {this.renderPlayerList()}
-        </ul>
-      </div>
+      <ListGroup>
+        {this.renderPlayerList()}
+      </ListGroup>
     );
   }
 }

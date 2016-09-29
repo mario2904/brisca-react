@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import ws from '../services/websocket';
 import { connect } from 'react-redux';
 
@@ -8,16 +9,14 @@ export default class AvailableGamesList extends Component {
   }
   renderAvailableGames () {
     return this.props.games.map((game) => {
-      return <li key={game} onClick={() => this.getGameInfo(game)}>{game}</li>;
+      return <ListGroupItem onClick={() => this.getGameInfo(game)}>{game}</ListGroupItem>;
     });
   }
   render () {
     return (
-      <div>
-        <ul>
-          {this.renderAvailableGames()}
-        </ul>
-      </div>
+      <ListGroup>
+        {this.renderAvailableGames()}
+      </ListGroup>
     );
   }
 }

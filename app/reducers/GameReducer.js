@@ -1,7 +1,9 @@
+import { START_GAME, PLAYED_CARD, END_ROUND, END_GAME } from '../actions';
+
 export default function (state={}, action) {
   let newState, currentIndex;
   switch (action.type) {
-    case 'START_GAME':
+    case START_GAME:
       // Destructure important info from payload.
       let { life, myIndex, numOfPlayers, myCards, players } = action.payload;
       // Create player structure
@@ -22,7 +24,7 @@ export default function (state={}, action) {
       }
       console.log("newState: ", newState);
       return newState;
-    case 'PLAYED_CARD':
+    case PLAYED_CARD:
       // Destructure important info from payload.
       let { name, pos } = action.payload;
       // Set new currentIndex
@@ -42,7 +44,7 @@ export default function (state={}, action) {
       }
       console.log("newState: ", newState);
       return newState;
-    case 'END_ROUND':
+    case END_ROUND:
       // Destructure important info from payload.
       let { winner, points } = action.payload;
       // Set new current Index
@@ -57,6 +59,8 @@ export default function (state={}, action) {
 
       }
       return newState;
+    case END_GAME:
+      return state;
     default:
       return state;
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as _ from 'lodash';
 
@@ -18,7 +19,10 @@ class AvailableGames extends Component {
         <h1>Available Games:</h1>
         <AvailableGamesList games={this.props.availableGames}/>
         <GameInfo game={this.props.gameInfo}/>
-        {_.isEmpty(this.props.gameInfo) || !_.isEmpty(this.props.myInfo.game) || <button onClick={() => this.joinGame()}>Join Game</button>}
+        {_.isEmpty(this.props.gameInfo)
+          || !_.isEmpty(this.props.myInfo.game)
+          ||  this.props.gameInfo.numOfPlayers <= this.props.gameInfo.players.length
+          || <Button onClick={() => this.joinGame()}>Join Game</Button>}
       </div>
     );
   }

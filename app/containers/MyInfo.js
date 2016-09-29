@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as _ from 'lodash';
 
@@ -18,7 +19,7 @@ import GameInfo from '../components/GameInfo';
       return (
         <div>
           <h1>Player ID: {this.props.myInfo.player.id}</h1>
-          <button onClick={() => this.createGame()}>Create a Game</button>
+          <Button onClick={() => this.createGame()}>Create a Game</Button>
         </div>
       );
     }
